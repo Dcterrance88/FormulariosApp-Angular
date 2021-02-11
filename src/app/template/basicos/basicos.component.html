@@ -1,15 +1,15 @@
 <h2>Template: Básicos</h2>
 <hr>
 
-<div class="row">  
+<div class="row">
   <div class="col">
 
-    <form (ngSubmit)="guardar()" 
+    <form (ngSubmit)="guardar()"
           #miFormulario="ngForm"
           autocomplete="off">
 
       <!-- Campo de producto -->
-      <div class="mb-3 row">        
+      <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Producto</label>
         <div class="col-sm-9">
           <input type="text"
@@ -27,7 +27,7 @@
       </div>
 
       <!-- Campo de precio -->
-      <div class="mb-3 row">        
+      <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Precio</label>
         <div class="col-sm-9">
           <input type="number"
@@ -45,7 +45,7 @@
       </div>
 
       <!-- Campo de existencias -->
-      <div class="mb-3 row">        
+      <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Existencias</label>
         <div class="col-sm-9">
           <input type="number"
@@ -78,7 +78,7 @@
   <div class="col">
     <span>Valid</span>
     <pre>{{miFormulario.valid}}</pre>
-    
+
     <span>Pristine</span>
     <pre>{{miFormulario.pristine}}</pre>
 
@@ -94,7 +94,7 @@
 
 </div>
 
-<!-- 
+<!--
   Pristine: -no se ha cambiado ninguno de los valores con los cuales se presento el formulario
             -el formulario con sus valores internos no se han tocado desde que se le presento al usuario
   Touched: -significa que si el usuario ha tocado el formulario
