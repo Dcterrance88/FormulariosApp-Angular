@@ -13,8 +13,7 @@ interface Favorito {
 @Component({
   selector: 'app-dinamicos',
   templateUrl: './dinamicos.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class DinamicosComponent {
 
