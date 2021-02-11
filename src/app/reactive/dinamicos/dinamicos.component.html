@@ -1,7 +1,9 @@
 <h2>Reactivos: <small> Dinámicos</small></h2>
 <hr>
 
-<form autocomplete="off">
+<form autocomplete="off"
+      [formGroup]="miFormulario"
+      (ngSubmit)="guardar()">
 
   <!-- Nombre -->
   <div class="row mb-3">
@@ -10,10 +12,12 @@
 
       <input type="text"
             class="form-control"
+            formControlName="nombre"
             placeholder="Nombre de la persona">
 
-      <span class="form-text text-danger">
-        El campo no puede estar vacío
+      <span class="form-text text-danger"
+            *ngIf="campoEsValido('nombre')">
+        El campo debe tener minimo 3 caracteres
       </span>
 
     </div>
@@ -25,15 +29,16 @@
     <div class="col-sm-9">
       <div class="input-group mb-3">
 
-        <!-- <input class="form-control"
+        <input class="form-control"
+                [formControl]="nuevoFavorito"
                 placeholder="Agregar favorito"
-                (keyup.enter)="a=1">
+                (keyup.enter)="agregarFavorito()">
 
         <button class="btn btn-outline-primary"
                 type="button"
-                (click)="a=1">
+                (click)="agregarFavorito()">
           Agregar
-        </button> -->
+        </button>
 
       </div>
     </div>
@@ -42,34 +47,52 @@
   <!-- Lista de Juegos Favoritos -->
   <div class="row mb-3">
     <label class="col-sm-3 col-form-label">Favoritos</label>
-    <div class="col-sm-9">
+    <div class="col-sm-9"
+          formArrayName="favoritos">
 
-      <!-- <div class="input-group mb-1"
-          *ngFor="let juego of persona.favoritos; let i = index">
-        <input class="form-control mb-1">
+      <div class="input-group mb-1"
+            *ngFor="let favorito of favoritosArr.controls; let i = index">
+
+        <input class="form-control mb-1"
+                [formControlName] = "i">
 
         <button class="btn btn-outline-danger"
                 type="button"
-                (click)="a=1">
+                (click)="borrar(i)">
           X
         </button>
-      </div> -->
+      </div>
 
     </div>
   </div>
 
   <div class="row">
-    <!-- <div class="col-sm-12">
-      <button type="button"
-              (click)="a=1"
+    <div class="col-sm-12">
+      <button type="submit"
               class="btn btn-primary float-end">
         Guardar
       </button>
-    </div> -->
+    </div>
   </div>
 
 </form>
+
+<span>Valid</span>
+<pre>{{ miFormulario.valid }}</pre>
+<br>
+
+<span>Value</span>
+<pre>{{ miFormulario.value | json }}</pre>
+<br>
+
+<span>Agregar Juego Valid</span>
+<pre>{{ nuevoFavorito.valid }}</pre>
+<br>
+
+<span>Agregar Juego Value</span>
+<pre>{{ nuevoFavorito.value | json }}</pre>
+<br>
 <!--
 <span>Persona</span>
-<pre>{{persona | json}}</pre> -->
+<pre>{{persona}}</pre> -->
 
