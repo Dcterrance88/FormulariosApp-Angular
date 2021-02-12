@@ -12,9 +12,13 @@ import { ValidatorService } from 'src/app/shared/validator/validator.service';
 export class RegistroComponent implements OnInit {
 
   public miFormulario : FormGroup = this._fb.group({
-    nombre  :['', [Validators.required, Validators.pattern(this._vs.nombreApellidoPattern)]],
-    email   :['', [Validators.required, Validators.pattern(this._vs.emailPattern)]],
-    username:['', [Validators.required, this._vs.noPuedeSerStrider] ],
+    nombre      :['', [Validators.required, Validators.pattern(this._vs.nombreApellidoPattern)]],
+    email       :['', [Validators.required, Validators.pattern(this._vs.emailPattern)]],
+    username    :['', [Validators.required, this._vs.noPuedeSerStrider]],
+    password    :['', [Validators.required, Validators.minLength(6)]],
+    repPassword :['', [Validators.required]],
+  }, { // validaciones aplicadas a todo el formulario
+    validators: [ this._vs.camposIguales( 'password', 'repPassword')]
   })
 
   constructor(private _fb : FormBuilder,

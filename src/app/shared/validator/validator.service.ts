@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,25 @@ export class ValidatorService {
   constructor() { }
 
   public noPuedeSerStrider ( control: FormControl ) : ValidationErrors | null {
-
     const valor:string = control.value?.trim().toLowerCase();
     const objValidErr: ValidationErrors = { noStrider: true }
-
     return (valor === 'strider')? objValidErr : null ;
+  }
+
+  public camposIguales( campo1: string, campo2: string) {
+    return ( formGroup: AbstractControl) : ValidationErrors | null => {
+      const pass1 : string = formGroup.get(campo1)?.value;
+      const pass2 : string = formGroup.get(campo2)?.value;
+      const objValidError : ValidationErrors = { noIguales: true};
+
+      console.log(pass1, pass2);
+
+      if (pass1 !== pass2) {
+        formGroup.get(campo2)?.setErrors({noIguales: true});
+        return objValidError
+      }
+      formGroup.get(campo2)?.setErrors(null);
+      return null;
+    }
   }
 }
