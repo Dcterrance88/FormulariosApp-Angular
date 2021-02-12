@@ -20,7 +20,19 @@ export class RegistroComponent implements OnInit {
     repPassword :['', [Validators.required]],
   }, { // validaciones aplicadas a todo el formulario
     validators: [ this._vs.camposIguales( 'password', 'repPassword')]
-  })
+  });
+
+  get emailErrorMsg() : string {
+    const errors = this.miFormulario.get('email')?.errors;
+    if( errors?.required ) {
+      return 'El email es obligatorio';
+    } else if( errors?.pattern ) {
+      return 'El email tiene un formato incorrecto';
+    } else if( errors?.emailTomado) {
+      return 'El email ya existe';
+    }
+    return '';
+  }
 
   constructor(private _fb : FormBuilder,
               private _vs : ValidatorService,
@@ -30,7 +42,9 @@ export class RegistroComponent implements OnInit {
     this.miFormulario.reset({
       nombre  : 'Terrance Asimov',
       email   : 'test1@test.com',
-      username: 'sepran'
+      username: 'sepran',
+      password: '123456',
+      repPassword: '123456'
     })
   }
 
