@@ -23,7 +23,7 @@ export class ValidatorService {
       const pass2 : string = formGroup.get(campo2)?.value;
       const objValidError : ValidationErrors = { noIguales: true};
 
-      console.log(pass1, pass2);
+      // console.log(pass1, pass2);
 
       if (pass1 !== pass2) {
         formGroup.get(campo2)?.setErrors({noIguales: true});

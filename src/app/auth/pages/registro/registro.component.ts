@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { emailPattern, nombreApellidoPattern, noPuedeSerStrider } from 'src/app/shared/validator/validaciones';
 import { ValidatorService } from 'src/app/shared/validator/validator.service';
+import { EmailValidatorService } from '../../../shared/validator/email-validator.service';
 
 @Component({
   selector: 'app-registro',
@@ -13,7 +14,7 @@ export class RegistroComponent implements OnInit {
 
   public miFormulario : FormGroup = this._fb.group({
     nombre      :['', [Validators.required, Validators.pattern(this._vs.nombreApellidoPattern)]],
-    email       :['', [Validators.required, Validators.pattern(this._vs.emailPattern)]],
+    email       :['', [Validators.required, Validators.pattern(this._vs.emailPattern)], [this._ev]],
     username    :['', [Validators.required, this._vs.noPuedeSerStrider]],
     password    :['', [Validators.required, Validators.minLength(6)]],
     repPassword :['', [Validators.required]],
@@ -22,12 +23,13 @@ export class RegistroComponent implements OnInit {
   })
 
   constructor(private _fb : FormBuilder,
-              private _vs : ValidatorService) { }
+              private _vs : ValidatorService,
+              private _ev : EmailValidatorService) { }
 
   ngOnInit(): void {
     this.miFormulario.reset({
       nombre  : 'Terrance Asimov',
-      email   : 'terranceasimov@gmail.com',
+      email   : 'test1@test.com',
       username: 'sepran'
     })
   }
